@@ -3,18 +3,18 @@
 ARCHIVO=$1
 
 # Verificando la velidez del input
-[[ $# -ne 1 ]] && echo "INGRESE UN SOLO ARGUMENTO..." && exit 1
+[[ $# -ne 1 ]] && echo "Error: No se ingreso un unico argumento." && exit 1
 
-! [[ -e $ARCHIVO ]] && echo "ESE ARCHIVO NO EXISTE..." && exit 2
+! [[ -e $ARCHIVO ]] && echo "Error: Archivo no existente." && exit 2
 
-! [[ -f $ARCHIVO ]] && echo "EL ARCHIVO NO ES VÁLIDO..." && exit 3
+! [[ -f $ARCHIVO ]] && echo "Error: No se ingreso un archivo valido." && exit 3
 
-PS3="Elija el filtro que desee aplicar: "
+PS3="Elija la funcion que desee ejecutar: "
 select ACCION in "SALIR" "Estadisticas de longitud de palabras." "Las 10 palabras mas repetidas." \
 "Encontrar nombres propios." "Estadisticas de longitud de oraciones." "Cantidad de lineas en blanco." \ "Convertir minúsculas a mayúsculas y visceversa" "Reemplazar una palabra por otra" "Seleccionar oracion o parrafo" "Buscar palabras capicua.";
 do
     [[ $REPLY -gt 10 || $REPLY -lt 1 ]] && echo "Opcion invalida" && continue
-    [[ $REPLY == 1 ]] && echo "Gracias por usar el programa :) " && break
+    [[ $REPLY == 1 ]] && echo "Terminando programa." && break
     [[ $REPLY == 2 ]] && bash statsWords.sh $ARCHIVO && continue # ANDA
     [[ $REPLY == 3 ]] && bash statsUsageWords.sh $ARCHIVO && continue # ANDA
     [[ $REPLY == 4 ]] && bash findNames.sh $ARCHIVO && continue # ANDA
