@@ -15,13 +15,13 @@ select ACCION in "SALIR" "Estadisticas de longitud de palabras." "Las 10 palabra
 do
     [[ $REPLY -gt 10 || $REPLY -lt 1 ]] && echo "Opcion invalida" && continue
     [[ $REPLY == 1 ]] && echo "Terminando programa." && break
-    [[ $REPLY == 2 ]] && ./statsWords.sh $ARCHIVO && continue # ANDA
-    [[ $REPLY == 3 ]] && ./statsUsageWords.sh $ARCHIVO && continue # ANDA
-    [[ $REPLY == 4 ]] && ./findNames.sh $ARCHIVO && continue # ANDA
-    [[ $REPLY == 5 ]] && ./statsSentences.sh $ARCHIVO && continue # ANDA
-    [[ $REPLY == 6 ]] && ./blankLinesCounter.sh $ARCHIVO && continue # ANDA
-    [[ $REPLY == 7 ]] && ./caseConverter.sh $ARCHIVO && continue # ANDA
-    [[ $REPLY == 8 ]] && echo "Donde la palabra sea: " ; read palabra1 && echo "Reemplazala con: " ; read palabra2 && ./substringReplace.sh $ARCHIVO $palabra1 $palabra2 && continue # ANDA
-    [[ $REPLY == 9 ]] && echo "Ingrese 'P' u 'O'" ; read formato && echo "Ingrese un numero: " ; read numero && ./blockSelection.sh $ARCHIVO $formato $numero && continue # ANDA
-    [[ $REPLY == 10 ]] && ./palindromeDetection.sh $ARCHIVO && continue
+    [[ $REPLY == 2 ]] && bash statsWords.sh $ARCHIVO && continue # ANDA
+    [[ $REPLY == 3 ]] && bash statsUsageWords.sh $ARCHIVO && continue # ANDA
+    [[ $REPLY == 4 ]] && bash findNames.sh $ARCHIVO && continue # ANDA
+    [[ $REPLY == 5 ]] && bash statsSentences.sh $ARCHIVO && continue # ANDA
+    [[ $REPLY == 6 ]] && bash blankLinesCounter.sh $ARCHIVO && continue # ANDA
+    [[ $REPLY == 7 ]] && bash caseConverter.sh $ARCHIVO && continue # ANDA
+    [[ $REPLY == 8 ]] && echo "Donde la palabra sea: " && read palabra1 && echo "Reemplazala con: " && read palabra2 && bash substringReplace.sh $ARCHIVO $palabra1 $palabra2 && continue # ANDA ESTA ANDA
+    [[ $REPLY == 9 ]] && echo "Ingrese P u O" && read formato && echo "Ingrese un numero: " && read numero && bash blockSelection.sh $ARCHIVO $formato $numero && continue # ANDA
+    [[ $REPLY == 10 ]] && bash palindromeDetection.sh $ARCHIVO && continue
 done
