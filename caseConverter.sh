@@ -10,6 +10,8 @@ then
 else
 	echo "Archivo inexistente"
 fi
+# si el archivo existe, con tr cambio las mayusculas por minusculas
+# y minusculas por mayusculas
 
 cat output.txt
 rm output.txt
