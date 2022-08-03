@@ -1,7 +1,6 @@
 #!/bin/bash
 
-#Contar lineas en blanco
+#Se realiza con un filtro grep, el -v selecciona los non-matching lines.
+RESULTADO=$( grep -v '\S' $1 | grep -v '\a' | wc -l)
 
-RESULTADO=$(grep -cv -P '\S' $1)
-echo $RESULTADO
-
+echo "La cantidad de lineas en blanco es de: $RESULTADO"
