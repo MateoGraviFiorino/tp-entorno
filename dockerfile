@@ -12,5 +12,7 @@ ADD ["substringReplace.sh", "/app"]
 ADD ["blockSelection.sh", "/app"]
 ADD ["palindromeDetection.sh", "/app"]
 ADD ["texto.txt", "/app"]
+ADD ["menu.sh", "/app"]
 
-ENTRYPOINT ["bash", "menu.sh"]
+ENTRYPOINT ["bash", "menu.sh","texto.txt"]
+
