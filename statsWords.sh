@@ -1,46 +1,39 @@
 #!/bin/bash
 
-#############################################################################################
-#
-# Indicador estadistico de longitud de palabra (mas larga, mas corta y promedio de longitud)
-#
-#############################################################################################
+ARCHIVO=$1
 
-FILE=$1
+SOLO_PALABRAS="^[A-Za-z]+$"    #regex para filtrar solo palabras
 
-SOLO_PALABRAS="^[A-Za-z]+$"    #Regex para omitir construcciones de caracteres que no sean palabras.
-
-MAYOR=0        #Palabra de mayor longitud
-MENOR=0        #Palabra de menor longitud
-CONT=0        #Contador de palabras
-SUMA=0        #Suma total de caracteres del archivo
+MAYOR_PAL=0
+MENOR_PAL=0
+CONT_PAL=0
+SUMA_CARACTERES=0
 
 while read linea; do
     for palabra in $linea; do
-    #Analizo sólamente las palabras
+    #recorremos con un while el texto
         if [[ $palabra =~ $SOLO_PALABRAS ]]; then
-        #Si es la primera palabra leída la guardo como más larga y más corta
-        if [ $CONT == 0 ]; then
-            MAYOR=$palabra
-            MENOR=$palabra
+        if [ $CONT_PAL == 0 ]; then
+            MAYOR_PAL=$palabra
+            MENOR_PAL=$palabra
         else
         #Si no es la primera palabra la comparo con las palabras guardadas
-            [ ${#palabra} -gt ${#MAYOR} ] && MAYOR=$palabra
-            [ ${#palabra} -lt ${#MENOR} ] && MENOR=$palabra
+            [ ${#palabra} -gt ${#MAYOR_PAL} ] && MAYOR_PAL=$palabra
+            [ ${#palabra} -lt ${#MENOR_PAL} ] && MENOR_PAL=$palabra
         fi
 
-        ((CONT++))            #Aumento contador
-        SUMA=$((SUMA+${#palabra}))    #Acumulo cantidad de caracteres
+        ((CONT_PAL++))            #incrementa contador
+        SUMA_CARACTERES=$((SUMA_CARACTERES+${#palabra}))
     fi
     done
-done <$FILE
+done <$ARCHIVO
 
-#Calculo promedio de cantidad de caracteres por palabra
-PROMEDIO=$((SUMA/CONT))
+#calcular promedios
+PROMEDIO=$((SUMA_CARACTERES/CONT_PAL))
 
-echo "Palabra mas larga: $MAYOR - ${#MAYOR} letras"
-#Determino si la palabra mas corta tiene una letra o más para mostrar el mensaje correcto (letra/letras)
-([ ${#MENOR} -eq 1 ] && echo "Palabra mas corta: $MENOR - ${#MENOR} letra") || echo "Palabra mas corta: $MENOR - ${#MENOR} letras" 
+echo "Palabra mas larga: $MAYOR_PAL - ${#MAYOR_PAL} letras"
+
+([ ${#MENOR_PAL} -eq 1 ] && echo "Palabra mas corta: $MENOR_PAL - ${#MENOR_PAL} letra") || echo "Palabra mas corta: $MENOR_PAL - ${#MENOR_PAL} letras" 
 echo "Promedio de longitud de palabras: $PROMEDIO letras"
 
 exit 0
