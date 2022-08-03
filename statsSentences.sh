@@ -4,15 +4,15 @@ TEXTO=$1
 
 CAT=$(cat $TEXTO)
 
-COUNT_SENTENCES=$((0))
+CONT_ORACIONES=$((0))
 SUMA_LONGITUDES=$((0))
 
-newIFS=$IFS
+newIFS=$IFS #el IFS es un separador de campo de entrada o delimitadores de palabras.
 IFS=$'.\n'
 
 for i in $CAT
 do
-	COUNT_SENTENCES=$((COUNT_SENTENCES+1))
+	CONT_ORACIONES=$((CONT_ORACIONES+1))
 	LONGITUD=${#i}
 	SUMA_LONGITUDES=$((SUMA_LONGITUDES+LONGITUD))
 
@@ -39,9 +39,8 @@ done
 IFS=$newIFS
 unset newIFS
 
-#------------ ORDENAR ----------------
 
-ORDENADA=$(cat ordenar.txt | sort -g)
+ORDENADA=$(cat ordenar.txt | sort -g) # el sort -g compara de acuerdo a un valor general
 
 #---------- MAS LARGA Y MAS CORTA --------
 N=$((1))
@@ -60,7 +59,7 @@ do
 		echo -e "La mas larga: $i \n"
 	else
 		N=$((N+1))
-		
+
 	fi
 done
 
@@ -69,7 +68,7 @@ unset newIFS
 
 #------------ PROMEDIO ------------------
 
-PROMEDIO=$(($SUMA_LONGITUDES/$COUNT_SENTENCES))
+PROMEDIO=$(($SUMA_LONGITUDES/$CONT_ORACIONES))
 
 echo "El promedio de longitudes es igual a $PROMEDIO"
 
